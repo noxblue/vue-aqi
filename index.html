@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="stylesheets/all.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js"
+    integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l"
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/regular.js"
+    integrity="sha384-t7yHmUlwFrLxHXNLstawVRBMeSLcXTbQ5hsd0ifzwGtN7ZF7RZ8ppM7Ldinuoiif"
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js"
+    integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c"
+    crossorigin="anonymous"></script>
+  <title>空氣品質AQI資訊</title>
+</head>
+
+<body class="content">
+  <div id="app">
+    <div class="header container-fluid bg-cover">
+      <h3 class="text-center text-white py-5">全台空氣品質指標(AQI)資訊</h3>
+      <h4 class="text-center text-white pt-5 pb-3">篩選城市資料</h4>
+      <div class="row justify-content-center">
+        <location-options :county="location" v-on:changed="changeSelectValue" class="col-5"></location-options>
+      </div>
+    </div>
+    <div class="container py-3">
+      <div>
+        <h4>關注地區</h4>
+        <p>點擊星號，即可將該地區設為置頂關注</p>
+        <div class="row justify-content-center">
+          <aqi-card v-for="(item,key) in filterIslikeCountry" :sitedata="item" :key="key" @like="changeIsLike">
+          </aqi-card>
+        </div>
+      </div>
+
+      <hr>
+      <h4>篩選後地區資訊</h4>
+      <div class="row justify-content-center">
+        <aqi-card v-for="(item,key) in filterUnlikeCounty" :sitedata="item" :key="key" @like="changeIsLike">
+        </aqi-card>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <p class="text-center my-0">資料來源：行政院環境保護署─環境資源資料開放平臺</p>
+  </div>
+
+
+
+  <script type="text/x-template" id="optionsTemplate">
+      <select name="" id="" class="form-control mb-3" v-model="selected" @change="changeSelect">
+        <option value="" disabled>--- 請選擇城市 ---</option>
+        <option v-for="item in county" :value="item" >{{item}}</option>
+      </select>
+      </script>
+
+  <script type="text/x-template" id="infoCard">
+          <div class="card col-3 m-1 px-0" 
+          :class=statusCheck(sitedata.Status)>
+            <div class="card-header">{{sitedata.County}} - {{sitedata.SiteName}}
+              <a href="#" class="float-right" style="color:green;" @click.prevent="clickLikeBtn"><i class="fas fa-star" v-if="sitedata.isLike"></i><i class="far fa-star" v-else></i></a>
+            </div>
+            <div class="card-body">
+              <ul class="list-unstyled">
+                <li>AQI 指數: {{sitedata.AQI}}</li>
+                <li>PM2.5: {{sitedata['PM2.5']}}</li>
+                <li>說明: {{sitedata.Status}}</li>
+              </ul>
+              更新時間: {{sitedata.PublishTime}}
+            </div>
+          </div>
+      </script>
+
+      
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="js/all.js"></script>
+</body>
+
+</html>

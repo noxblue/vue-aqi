@@ -1,0 +1,37 @@
+.status-aqi2 {
+  background-color: #ffffb3;
+}
+
+.status-aqi3 {
+  background-color: #ff7e00;
+}
+
+.status-aqi4 {
+  background-color: #ff0000;
+}
+
+.status-aqi5 {
+  background-color: #8f3f97;
+}
+
+.status-aqi6 {
+  background-color: #7e0023;
+}
+.content {
+  background-color: #F8F8F8;
+}
+
+.header {
+  background-image: url(https://images.unsplash.com/photo-1551748179-673f4dc0dd82?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);
+  height: 400px;
+  width: 100%;
+}
+.bg-cover{
+	background-size: cover;
+	background-position: center center;
+}
+
+.footer{
+  padding: 20px;
+  background-color: #99ccff;
+}
